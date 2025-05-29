@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def plot_svr_summary():
-    """plot resumo """
     # Configuração visual
     plt.style.use('default')  # Mudando de seaborn para default
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
@@ -57,7 +56,6 @@ def plot_svr_summary():
     plt.show()
 
 def code():
-    """Script principal para testar modelos e ver plots de comparacao """
     try:
         X_train, X_test, y_train, y_test, feature_names = carregar_e_preparar_dados()
         
