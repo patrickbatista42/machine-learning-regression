@@ -1,71 +1,71 @@
-# Projeto de Regressão para Machine Learning
+# Machine Learning Regression Project
 
-Este projeto implementa um sistema de regressão usando machine learning para predição de preços de carros. Abaixo está a estrutura do projeto e a descrição de cada componente.
+This project implements a regression system using machine learning for car price prediction. Below is the project structure and description of each component.
 
-## Estrutura do Projeto
+## Project Structure
 
-### Arquivos Principais
-- `train_mod.csv` - Dataset original contendo os dados dos carros
-- `README.md` - Este arquivo de documentação
+### Main Files
+- `train_mod.csv` - Original dataset containing car data
+- `README.md` - This documentation file
 
-### Pasta PreProcessamento/
-Contém os scripts relacionados ao pré-processamento dos dados:
-- `main.py` - Script principal que executa todo o pipeline de pré-processamento
-- `preprocessamento.py` - Funções auxiliares para pré-processamento dos dados
-- `preprocessamento_com_outlier.py` - Versão alternativa que mantém os outliers
-- Arquivos gerados:
-  - `ProcessedDatabase_SEM_outliers.csv` - Dataset processado sem outliers
-  - `ProcessedDatabase_target_SEM_outliers.csv` - Variável target (preços) sem outliers
+### PreProcessamento/ Folder
+Contains scripts related to data preprocessing:
+- `main.py` - Main script that executes the entire preprocessing pipeline
+- `preprocessamento.py` - Helper functions for data preprocessing
+- `preprocessamento_com_outlier.py` - Alternative version that keeps outliers
+- Generated files:
+  - `ProcessedDatabase_SEM_outliers.csv` - Processed dataset without outliers
+  - `ProcessedDatabase_target_SEM_outliers.csv` - Target variable (prices) without outliers
 
-### Pasta Estudo_metodos/
-Contém os scripts para implementação e avaliação dos modelos:
-- `mainTest.py` - Script principal para testes dos modelos
-- `modelos.py` - Implementação dos diferentes modelos de machine learning
-- `otimizacao.py` - Funções para otimização de hiperparâmetros
-- `feature_engineering.py` - Funções para engenharia de features
-- `avaliacao.py` - Métricas e funções de avaliação dos modelos
+### Estudo_metodos/ Folder
+Contains scripts for model implementation and evaluation:
+- `mainTest.py` - Main script for model testing
+- `modelos.py` - Implementation of different machine learning models
+- `otimizacao.py` - Functions for hyperparameter optimization
+- `feature_engineering.py` - Functions for feature engineering
+- `avaliacao.py` - Metrics and model evaluation functions
 
-### Arquivos Processados
-Diferentes versões do dataset processado:
-- `ProcessedDatabase_SEM_outliers.csv` - Dataset completo sem outliers
-- `ProcessedDatabase_COM_outliers.csv` - Dataset completo com outliers
-- `ProcessedDatabase_target_SEM_outliers.csv` - Apenas preços (target) sem outliers
-- `ProcessedDatabase_target_COM_outliers.csv` - Apenas preços (target) com outliers
-- `ProcessedDatabase_target.csv` - Versão base dos preços
+### Processed Files
+Different versions of the processed dataset:
+- `ProcessedDatabase_SEM_outliers.csv` - Complete dataset without outliers
+- `ProcessedDatabase_COM_outliers.csv` - Complete dataset with outliers
+- `ProcessedDatabase_target_SEM_outliers.csv` - Only prices (target) without outliers
+- `ProcessedDatabase_target_COM_outliers.csv` - Only prices (target) with outliers
+- `ProcessedDatabase_target.csv` - Base version of prices
 
-## Pipeline de Pré-processamento
+## Preprocessing Pipeline
 
-O pré-processamento dos dados inclui:
-1. Limpeza de dados faltantes
-2. Tratamento de outliers
-3. Codificação de variáveis categóricas
-4. Normalização dos dados
-5. Análise de correlações
-6. Redução de dimensionalidade (PCA)
+Data preprocessing includes:
+1. Missing data cleaning
+2. Outlier treatment
+3. Categorical variable encoding
+4. Data normalization
+5. Correlation analysis
+6. Dimensionality reduction (PCA)
 
-## Modelos Implementados
+## Implemented Models
 
-Os modelos de machine learning incluem:
-1. Regressão Linear
+The machine learning models include:
+1. Linear Regression
 2. Random Forest
 3. Gradient Boosting
 4. Support Vector Regression (SVR)
 
-## Como Usar
+## How to Use
 
-1. Execute o pré-processamento:
+1. Run preprocessing:
 ```bash
 cd PreProcessamento
 python main.py
 ```
 
-2. Execute os modelos:
+2. Run models:
 ```bash
 cd Estudo_metodos
 python mainTest.py
 ```
 
-## Requisitos
+## Requirements
 - Python 3.x
 - pandas
 - numpy
@@ -73,5 +73,5 @@ python mainTest.py
 - seaborn
 - matplotlib
 
-## Resultados
-Os resultados do processamento são salvos nos arquivos CSV correspondentes, permitindo análise posterior e comparação entre diferentes abordagens (com/sem outliers).
+## Results
+Processing results are saved in the corresponding CSV files, allowing for subsequent analysis and comparison between different approaches (with/without outliers).
