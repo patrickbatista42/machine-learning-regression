@@ -12,7 +12,6 @@ This project implements a regression system using machine learning for car price
 Contains scripts related to data preprocessing:
 - `main.py` - Main script that executes the entire preprocessing pipeline
 - `preprocessamento.py` - Helper functions for data preprocessing
-- `preprocessamento_com_outlier.py` - Alternative version that keeps outliers
 - Generated files:
   - `ProcessedDatabase_SEM_outliers.csv` - Processed dataset without outliers
   - `ProcessedDatabase_target_SEM_outliers.csv` - Target variable (prices) without outliers
@@ -28,9 +27,7 @@ Contains scripts for model implementation and evaluation:
 ### Processed Files
 Different versions of the processed dataset:
 - `ProcessedDatabase_SEM_outliers.csv` - Complete dataset without outliers
-- `ProcessedDatabase_COM_outliers.csv` - Complete dataset with outliers
 - `ProcessedDatabase_target_SEM_outliers.csv` - Only prices (target) without outliers
-- `ProcessedDatabase_target_COM_outliers.csv` - Only prices (target) with outliers
 - `ProcessedDatabase_target.csv` - Base version of prices
 
 ## Preprocessing Pipeline
