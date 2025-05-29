@@ -5,13 +5,6 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import seaborn as sns
 
 class Validacao:
-    """Classe que contem somente metodos para usar nos modelos. 
-    Estabelece as métricas de:
-        - MSE
-        - RMSE
-        - MAE
-        - R²    
-    """
     
     @staticmethod
     def avaliar_modelo(y_true, y_pred, nome_modelo):
@@ -47,9 +40,6 @@ class Validacao:
 
     @staticmethod
     def plotar_predicoes(y_true, y_pred, nome_modelo):
-        """
-        Plota um gráfico de dispersão dos valores reais vs preditos.
-        """
         plt.figure(figsize=(10, 6))
         plt.scatter(y_true, y_pred, alpha=0.5)
         plt.plot([y_true.min(), y_true.max()], [y_true.min(), y_true.max()], 'r--', lw=2)
@@ -61,9 +51,7 @@ class Validacao:
 
     @staticmethod
     def plotar_residuos(y_true, y_pred, nome_modelo):
-        """
-        Plota análises dos resíduos do modelo.
-        """
+
         # Converter para arrays numpy se necessário
         if isinstance(y_true, pd.DataFrame) or isinstance(y_true, pd.Series):
             y_true = y_true.values.ravel()
