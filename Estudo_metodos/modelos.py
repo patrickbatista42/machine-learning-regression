@@ -22,13 +22,11 @@ class Modelo:
         raise NotImplementedError("Implemente este método na classe filha")
     
     def predizer(self, X_test):
-        """Realiza predições com o modelo treinado."""
         if self.model is None:
             raise ValueError("Modelo não foi treinado ainda!")
         return self.model.predict(X_test)
     
     def avaliar(self, X_test, y_test):
-        """Avalia o modelo com dados de teste."""
         y_pred = self.predizer(X_test)
 
         #usa métodos estáticos da classe validacao
@@ -41,7 +39,6 @@ class Modelo:
         return self.resultado
     
     def validacao_cruzada(self, X_train, y_train, cv=10):
-        """Realiza validação cruzada no modelo."""
         if self.model is None:
             raise ValueError("Modelo não foi treinado ainda!")
         
@@ -51,7 +48,6 @@ class Modelo:
         return cv_scores
 
 class RegressaoLinear(Modelo):
-    """Implementação do modelo de Regressão Linear."""
     
     def __init__(self):
         super().__init__("Regressão Linear")
@@ -63,7 +59,6 @@ class RegressaoLinear(Modelo):
         return self
 
 class SVR_Model(Modelo):
-    """Implementação do modelo Support Vector Regression com otimização NSGA-II ou Grid Search"""
     
     def __init__(self):
         super().__init__("SVR Otimizado")
@@ -77,17 +72,6 @@ class SVR_Model(Modelo):
         self.model = None
     
     def treinar(self, X_train, y_train, X_test=None, y_test=None, ParametersSearch=3):
-        """
-        Treina o modelo SVR 
-        seleção manual do ParametersSearch!  (por aqui)
-        
-        Args:
-            X_train: Features de treino
-            y_train: Target de treino
-            X_test: Features de teste (opcional, não usado)
-            y_test: Target de teste (opcional, não usado)
-            ParametersSearch: Método de otimização (1=NSGA-II, 2=Grid Search, 3=Comparação)
-        """
         print(f"\nTreinando {self.nome}...")
         
         if ParametersSearch == 1:
@@ -131,13 +115,11 @@ class SVR_Model(Modelo):
         return self.model
 
     def predizer(self, X):
-        """Realiza predições com o modelo treinado"""
         if self.model is None:
             raise ValueError("O modelo precisa ser treinado antes de fazer predições")
         return self.model.predict(X)
 
 class RandomForest(Modelo):
-    """Implementação do modelo Random Forest"""
     
     def __init__(self):
         super().__init__("Random Forest Otimizado")
@@ -154,7 +136,6 @@ class RandomForest(Modelo):
         return self
     
     def plotar_importancia_features(self, feature_names):
-        """Plota a importância das features do Random Forest."""
         if self.model is None:
             raise ValueError("Modelo não foi treinado ainda!")
         
@@ -174,7 +155,6 @@ class RandomForest(Modelo):
         plt.show()
 
 def carregar_e_preparar_dados():
-    """Carrega e prepara os dados para modelagem."""
     print("Carregando dados...")
     X = pd.read_csv('ProcessedDatabase_SEM_outliers.csv')
     y = pd.read_csv('ProcessedDatabase_target_SEM_outliers.csv')
@@ -194,7 +174,6 @@ def carregar_e_preparar_dados():
     return X_train, X_test, y_train, y_test, X_engineered.columns
 
 def comparar_modelos(modelos):
-    """Compara os resultados dos diferentes modelos."""
     resultados = [modelo.resultado for modelo in modelos]
     
     print("\n=== Comparação dos Modelos ===")

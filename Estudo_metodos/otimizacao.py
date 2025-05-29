@@ -14,9 +14,6 @@ from pymoo.optimize import minimize
 from joblib import Parallel, delayed
 
 def otimizar_random_forest(X_train, y_train, cv=10, n_iter=50):
-    """
-    Otimiza os hiperparâmetros do Random Forest usando RandomizedSearchCV.
-    """
     # Convertendo para array se necessário
     if hasattr(y_train, 'values'):
         y_train = y_train.values.ravel()
@@ -58,10 +55,6 @@ def otimizar_random_forest(X_train, y_train, cv=10, n_iter=50):
     return random_search.best_estimator_, random_search.best_params_, random_search.best_score_ 
 
 class SVROptimization(Problem):
-    """
-    Classe para otimização dos hiperparâmetros do SVR usando NSGA-II.
-    Otimiza simultaneamente MAE (minimizar) e R2 (maximizar).
-    """
     def __init__(self, X_train, y_train, cv=10):
         super().__init__(
             n_var=3,  # variaveis (C, epsilon, gamma)
@@ -75,7 +68,6 @@ class SVROptimization(Problem):
         self.cv = cv
 
     def evaluate_solution(self, x_i):
-        """Avalia uma única solução"""
         svr = SVR(
             C=x_i[0],
             epsilon=x_i[1],
@@ -109,17 +101,6 @@ class SVROptimization(Problem):
         out["F"] = np.column_stack([mae_values, r2_values])
 
     def otimizar(self, pop_size=100, n_gen=10):
-        """
-        Executa a otimização usando NSGA-II.
-        
-        Args:
-            pop_size: Tamanho da população
-            n_gen: Número de gerações
-            
-        Returns:
-            dict: Melhores parâmetros encontrados
-            dict: Valores dos objetivos para a melhor solução
-        """
         # NSGA-II
         algorithm = NSGA2(
             pop_size=pop_size,
@@ -142,10 +123,6 @@ class SVROptimization(Problem):
         return self._get_best_compromise_solution(res)
 
     def _get_best_compromise_solution(self, res):
-        """
-        Seleciona a melhor solução de compromisso da frente de Pareto.
-        Usa o método da menor distância ao ponto ideal após normalização.
-        """
         # Normaliza os objetivos
         F = res.F
         F_norm = (F - F.min(axis=0)) / (F.max(axis=0) - F.min(axis=0))
@@ -169,15 +146,6 @@ class SVROptimization(Problem):
         return best_params, best_objectives
 
     def criar_modelo(self, params):
-        """
-        Cria um modelo SVR com os parâmetros otimizados.
-        
-        Args:
-            params: Dicionário com os parâmetros otimizados
-            
-        Returns:
-            SVR: Modelo SVR configurado com os melhores parâmetros
-        """
         return SVR(
             C=params['C'],
             epsilon=params['epsilon'],
@@ -186,15 +154,6 @@ class SVROptimization(Problem):
         ) 
 
 def otimizar_svr_grid(X_train, y_train, cv=10, n_jobs=6):
-    """
-    Otimiza os hiperparâmetros do SVR usando Grid Search.
-    
-    Args:
-        X_train: Features de treino
-        y_train: Target de treino
-        cv: Número de folds para validação cruzada
-        n_jobs: Número de núcleos para paralelização
-    """
     # Definir grade de parâmetros
     param_grid = {
         'C': [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0],
@@ -270,14 +229,6 @@ def otimizar_svr_grid(X_train, y_train, cv=10, n_jobs=6):
     return grid_search.best_estimator_, grid_search.best_params_, grid_search.best_score_
 
 def comparar_otimizacoes_svr(X_train, y_train, X_test, y_test, params_nsga=None):
-    """
-    Compara os resultados da otimização por Grid Search e NSGA-II.
-    
-    Args:
-        X_train, y_train: Dados de treino
-        X_test, y_test: Dados de teste
-        params_nsga: Parâmetros já otimizados pelo NSGA-II (opcional)
-    """
     # Grid Search
     print("Executando Grid Search...")
     svr_grid, params_grid, _ = otimizar_svr_grid(X_train, y_train)
@@ -365,14 +316,6 @@ def comparar_otimizacoes_svr(X_train, y_train, X_test, y_test, params_nsga=None)
     )
 
 def comparar_hyperparametros_svr(X_train, y_train, params_predefinidos, cv=10):
-    """
-    Compara os resultados do Grid Search com um conjunto de parâmetros predefinidos usando validação cruzada.
-    
-    Args:
-        X_train, y_train: Dados de treino
-        params_predefinidos: Dicionário com parâmetros predefinidos (C, epsilon, gamma)
-        cv: Número de folds para validação cruzada
-    """
     # Grid Search
     print("Executando Grid Search...")
     svr_grid, params_grid, _ = otimizar_svr_grid(X_train, y_train, cv)

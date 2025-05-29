@@ -20,7 +20,6 @@ def tratar_nan(df):
     return df
 
 def criar_interacoes_numericas(df, colunas_numericas):
-    """Cria interações entre features numéricas."""
     interacoes = []
     for i, col1 in enumerate(colunas_numericas):
         for col2 in colunas_numericas[i+1:]:
@@ -30,7 +29,6 @@ def criar_interacoes_numericas(df, colunas_numericas):
     return interacoes
 
 def criar_features_polinomiais(df, colunas_numericas, grau=2):
-    """Cria features polinomiais."""
     polinomiais = []
     for col in colunas_numericas:
         nome = f"{col}_quad"
@@ -39,7 +37,6 @@ def criar_features_polinomiais(df, colunas_numericas, grau=2):
     return polinomiais
 
 def criar_agregacoes_grupo(df, colunas_grupo, colunas_agg):
-    """Cria agregações baseadas em grupos."""
     agregacoes = []
     for col_grupo in colunas_grupo:
         for col_agg in colunas_agg:
@@ -82,7 +79,6 @@ def criar_features_categoricas_agregadas(df, coluna_grupo, coluna_valor):
     return df, list(agregacoes.keys())
 
 def aplicar_feature_engineering(df):
-    """Aplica todo o processo de feature engineering."""
     # Cópia do DataFrame para não modificar o original
     df_eng = df.copy()
     
